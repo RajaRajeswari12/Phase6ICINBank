@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>View Products</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link th:rel="stylesheet" th:href="@{/mystyle.css}" />
+</head>
+
+<body>
+
+<header th:replace="fragments/adminHeader"></header>
+	
+<div th:if="${session.AdminName != null}">	
+	
+	<div class="container my-2">
+
+
+
+		<h1>User Account Page</h1>
+
+		<hr>
+		<br>
+		<div th:if="${totalRecords != 0}">
+			<table border="1" class="table table-striped table-responsive-md">
+				<thead>
+					<tr>
+						<th>User Name</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Email</th>
+						<th>Phone</th>
+						<th>Primary Account</th>
+						<th>Savings Account</th>						
+						<th>Enabled</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="userDetail : ${listOfUserDetail}">
+						<td th:text="${userDetail.user.userName}"></td>
+						<td th:text="${userDetail.firstName}"></td>
+						<td th:text="${userDetail.lastName}"></td>
+						<td th:text="${userDetail.email}"></td>
+						<td th:text="${userDetail.phoneNum}"></td>
+						<td th:text="${userDetail.currentAccount.currentActNo}"></td>
+						<td th:text="${userDetail.savingsAccount.savingActNo}"></td>
+						<td>
+						<a th:if="${userDetail.user.active}">Enabled</a>
+						</td>
+						<td th:text="!${userDetail.user.active}"></td>
+					</tr>
+
+				</tbody>
+			</table>
+
+			<div th:if="${totalPages > 1}">
+				
+						<ul class="pagination">
+							<span th:each="index : ${#numbers.sequence(1,totalPages)}">
+								<li class="page-item"><a class="page-link"
+									th:href="@{'/viewUserDetails/'+${index}}">[[${index}]]</a></li>
+							</span>
+						</ul>
+					
+
+			</div>
+		</div>
+		<div th:if="${totalRecords == 0}">
+		<h2>No Transactions Done !!!!!!!!</h2>
+	</div>
+	</div>
+</div>
+	
+</body>
+</html>

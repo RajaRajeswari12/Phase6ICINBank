@@ -2,11 +2,11 @@ package com.ICINBank.ICINbanking.service;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.data.domain.Page;
+
 import com.ICINBank.ICINbanking.model.Customer;
-import com.ICINBank.ICINbanking.model.User;
 
 public interface CustomerService {
-//	public String generateAccountNumber();
 	
 	public Customer getCustomerBySessionVar(HttpServletRequest request);
 	
@@ -14,6 +14,7 @@ public interface CustomerService {
 	
 	public Customer registerNewCustomer(Customer customer);
 	
+	Page<Customer> findAllCustomer(int pageNo, int userCount);
 	
 
 }

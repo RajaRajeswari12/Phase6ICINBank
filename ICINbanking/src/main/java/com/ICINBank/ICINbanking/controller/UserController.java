@@ -70,7 +70,7 @@ public class UserController {
 		if(bindingResult.hasErrors()) {
 			return "adminLogin";
 		}else {
-			session.setAttribute("UserName", user.getUserName());
+			session.setAttribute("AdminName", user.getUserName());
 		}
 
 		return "adminHomePage";

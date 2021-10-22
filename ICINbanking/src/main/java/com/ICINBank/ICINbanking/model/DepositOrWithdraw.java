@@ -27,5 +27,7 @@ public class DepositOrWithdraw {
 	private String actionType;
 	
 	private String accountType;
+	
+	private String status;
 
 }

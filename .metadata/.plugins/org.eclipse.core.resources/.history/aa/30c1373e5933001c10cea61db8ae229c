@@ -1,0 +1,43 @@
+package com.ICINBank.ICINbanking.controller;
+
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.ICINBank.ICINbanking.model.CurrentAccountTransaction;
+
+@Controller
+public class AdminController {
+	
+	@Autowired
+	private Customer customer;
+	
+	@GetMapping("/viewUserDetail")
+	public String gotoUserDetail(Model model) {
+				
+		return paginateViewUserDetail(1,model);
+		
+	}
+	
+	@GetMapping("/viewUserDetails/{pageNo}")
+	public String paginateViewUserDetail(@PathVariable(value="pageNo") int pageNo,Model model ) 
+	{		
+		int reportCount = 10;
+		Page<CurrentAccountTransaction> page = currentAccountTransactionService.findByCurrentAccountNum(TransactionAccNo,pageNo, reportCount);
+		List<CurrentAccountTransaction> listOfCurrentAccountTransaction = page.getContent();		
+		model.addAttribute("activePage",pageNo);
+		model.addAttribute("totalPages",page.getTotalPages());
+		model.addAttribute("totalRecords",page.getTotalElements());
+		model.addAttribute("listOfAccountTransaction",listOfCurrentAccountTransaction);
+		model.addAttribute("paginate","primary");
+		model.addAttribute("AccNO", TransactionAccNo);
+		return "viewTransactionDetails";
+	}
+	
+
+}

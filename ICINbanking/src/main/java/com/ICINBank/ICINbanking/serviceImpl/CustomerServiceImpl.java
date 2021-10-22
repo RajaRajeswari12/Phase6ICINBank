@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.ICINBank.ICINbanking.model.CurrentAccount;
@@ -60,6 +63,12 @@ public class CustomerServiceImpl implements CustomerService{
 			return cust;	
 			
 		}
+
+	@Override
+	public Page<Customer> findAllCustomer(int pageNo, int userCount) {
+		Pageable pageable = PageRequest.of(pageNo-1, userCount);
+		return customerRepo.findAll(pageable);
+	}
 	
 	
 //	@Override

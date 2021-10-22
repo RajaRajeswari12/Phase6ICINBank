@@ -1,0 +1,5 @@
+package com.ICINBank.ICINbanking.model;
+
+public class DepositOrWithdraw {
+
+}

@@ -1,0 +1,15 @@
+package com.ICINBank.ICINbanking.service;
+
+import org.springframework.data.domain.Page;
+
+import com.ICINBank.ICINbanking.model.CurrentAccountTransaction;
+import com.ICINBank.ICINbanking.model.SavingsAccountTransaction;
+
+public interface CurrentAccountTransactionService {
+	
+
+	Page<CurrentAccountTransaction> findByCurrentAccountNum(int savingActNo,int pageNo, int reportCount);
+	
+	public CurrentAccountTransaction saveCurrentAccountTransaction(CurrentAccountTransaction currentAccountTransaction);
+
+}

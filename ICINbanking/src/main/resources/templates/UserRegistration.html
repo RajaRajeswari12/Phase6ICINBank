@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link th:rel="stylesheet" th:href="@{mystyle.css}">
+</head>
+
+<body>
+	<!-- <header th:insert="fragments/header"></header>  -->
+	<div class="container col-md-8 col-md-offset-3" style="overflow: auto">
+		<h1> User Registration</h1>
+
+
+		<form th:action="@{/signup}" th:object="${customer}"
+			method="POST">
+			<div class="form-group">
+				<label for="firstName">FirstName</label> <input type="text"
+					class="form-control" th:field="*{firstName}" />
+				<p th:if="${#fields.hasErrors('firstName')}"
+					th:errorclass="error" th:errors="*{firstName}" />
+			</div>
+
+			<div class="form-group">
+				<label for="lastName">lastName</label> <input type="text"
+					class="form-control" th:field="*{lastName}" />
+				<p th:if="${#fields.hasErrors('lastName')}"
+					th:errorclass="error" th:errors="*{lastName}" />
+			</div>
+			<div class="form-group">
+				<label for="phoneNum">Phone</label> <input type="text"
+					class="form-control" th:field="*{phoneNum}" />
+				<p th:if="${#fields.hasErrors('phoneNum')}"
+					th:errorclass="error" th:errors="*{phoneNum}" />
+			</div>
+
+			<div class="form-group">
+				<label for="email">Email</label> <input type="email"
+					class="form-control" th:field="*{email}" />
+				<p th:if="${#fields.hasErrors('email')}"
+					th:errorclass="error" th:errors="*{email}" />
+			</div>
+			<div class="form-group">
+				<label for="userName">UserName</label> <input type="text"
+					class="form-control" th:field="*{user.userName}" />
+				<p th:if="${#fields.hasErrors('user.userName')}"
+					th:errorclass="error" th:errors="*{user.userName}" />
+			</div>
+
+			<div class="form-group">
+				<label for="password">Password</label> <input type="password"
+					class="form-control" th:field="*{user.password}" />
+				<p th:if="${#fields.hasErrors('user.password')}"
+					th:errorclass="error" th:errors="*{user.password}" />
+			</div>
+		
+			
+			
+				<button type="submit" class="btn btn-secondary">Sign up!</button>
+				
+			
+		</form>
+
+
+	</div>
+</body>
+</html>

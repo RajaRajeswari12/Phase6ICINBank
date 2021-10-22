@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Header</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css}" th:rel="stylesheet" >
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark" th:if="${session.UserName == null}">
+ <a class="navbar-brand" href="/index">Login</a>
+  <a class="navbar-brand" href="/signup">Register</a>
+
+
+</nav>
+
+ <nav class="navbar navbar-expand-sm bg-dark navbar-dark" th:if="${session.UserName != null}">
+ <a class="navbar-brand" href="/home">Home</a>
+ <ul class="navbar-nav"> 
+   <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        Accounts
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" >Primary Account</a>
+          <a class="dropdown-item" th:href="@{'/viewSavingsAccountTransaction/?TransactionAccNo='+${authCustomer.savingsAccount.savingActNo}}">Savings Account</a>
+         
+      </div>
+    </li>
+     <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        Transfer
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="/requestChequeBook">Primary Account</a>
+          <a class="dropdown-item" href="/requestChequeBook">Savings Account</a>
+         
+      </div>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        Request
+      </a>
+      <div class="dropdown-menu">
+       <a class="dropdown-item" href="/requestChequeBook">Profile</a>
+        <a class="dropdown-item" href="/requestChequeBook">Cheque Book Request</a>
+         
+      </div>
+    </li>
+    
+  </ul>
+  
+   <ul class="nav navbar-right">
+          
+              <li><a  href="/logout">LogOut</a></li>
+             
+            </ul>
+
+</nav>
+<br>
+  
+<script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js}"></script>
+  <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js}"></script>
+  <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

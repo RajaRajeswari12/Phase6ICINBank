@@ -1,0 +1,8 @@
+package com.ICINBank.ICINbanking.controller;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class DepositOrWithdrawController {
+
+}

@@ -1,0 +1,98 @@
+package com.ICINBank.ICINbanking.serviceImpl;
+
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ICINBank.ICINbanking.model.CurrentAccount;
+import com.ICINBank.ICINbanking.model.CurrentAccountTransaction;
+import com.ICINBank.ICINbanking.model.SavingsAccount;
+import com.ICINBank.ICINbanking.model.SavingsAccountTransaction;
+import com.ICINBank.ICINbanking.repository.CurrentAccountRepository;
+import com.ICINBank.ICINbanking.service.CurrentAccountService;
+import com.ICINBank.ICINbanking.service.CurrentAccountTransactionService;
+import com.ICINBank.ICINbanking.service.SavingsAccountService;
+import com.ICINBank.ICINbanking.service.SavingsAccountTransactionService;
+
+@Service
+public class CurrentAccountServiceImpl implements CurrentAccountService{
+	
+	@Autowired
+	private CurrentAccountRepository currentAccountRepo;
+	
+	@Autowired
+	private CurrentAccountTransactionService crtService;
+	
+	@Autowired
+	private SavingsAccountTransactionService srtService;
+	
+	@Autowired
+	private SavingsAccountService savingsAccService;
+
+	@Override
+	public CurrentAccount createNewCurrentAccount() {
+		CurrentAccount newAccount = new CurrentAccount();
+	
+		newAccount.setAccountType("primary");
+		return currentAccountRepo.save(newAccount);	
+	}
+
+	@Override
+	public CurrentAccount transferFromCurrentAccount(int fromAccountNo, int toAccountNo, double amount,
+			String accType) {
+		CurrentAccount fromAcc = currentAccountRepo.findByCurrentActNo(fromAccountNo);
+		SavingsAccount toAcc = null;
+		CurrentAccount toCurAcc = null ;
+		double fromPrevBalance = fromAcc.getAmount();
+		double fromAvailBalance = fromPrevBalance-amount;
+		
+		
+		double toPrevBalance = 0;
+		double toAvailBalance = 0;
+		if(accType.equalsIgnoreCase("savings")) {
+			toAcc = savingsAccService.findBySavingsAccNum(toAccountNo);	
+			toPrevBalance = toAcc.getAmount();
+			 toAvailBalance = toPrevBalance+amount;
+			 toAcc.setAmount(toAvailBalance);
+			 
+			 SavingsAccountTransaction srt = new SavingsAccountTransaction(toAcc,fromAccountNo,toAccountNo,new Date(),toPrevBalance,toAvailBalance,"Credit");
+			 srtService.saveSavingsAccountTrans(srt);
+			 savingsAccService.saveSavingsAccount(toAcc);
+			 
+			
+		}else if(accType.equalsIgnoreCase("current")) {
+			toCurAcc = currentAccountRepo.findByCurrentActNo(toAccountNo);
+			toPrevBalance = toCurAcc.getAmount();
+			 toAvailBalance = toPrevBalance+amount;
+			 toCurAcc.setAmount(toAvailBalance);
+			 CurrentAccountTransaction crt = new CurrentAccountTransaction(fromAcc,fromAccountNo,toAccountNo,new Date(),fromPrevBalance,fromAvailBalance,"Debit");
+			 crtService.saveCurrentAccountTransaction(crt);
+			 saveCurrentAccount(toCurAcc);
+		}
+		
+		fromAcc.setAmount(fromAvailBalance);
+		
+		 CurrentAccountTransaction crt = new CurrentAccountTransaction(fromAcc,fromAccountNo,toAccountNo,new Date(),fromPrevBalance,fromAvailBalance,"Debit");
+		 crtService.saveCurrentAccountTransaction(crt);
+		
+		 saveCurrentAccount(fromAcc);
+		
+		
+		
+		
+		
+		return null;
+	}
+	
+	
+	
+
+	
+	public CurrentAccount saveCurrentAccount(CurrentAccount currentAccount) {
+		
+		return currentAccountRepo.save(currentAccount);
+		
+	}
+
+}

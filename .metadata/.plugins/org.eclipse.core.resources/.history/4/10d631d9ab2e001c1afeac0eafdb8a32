@@ -1,0 +1,48 @@
+package com.ICINBank.ICINbanking.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.ICINBank.ICINbanking.model.SavingsAccountTransaction;
+import com.ICINBank.ICINbanking.service.SavingsAccountTransactionService;
+
+@Controller
+public class AccountTransactionController {
+	
+	@Autowired
+	private SavingsAccountTransactionService savingsAccTransactionService;
+	
+	@GetMapping("/viewSavingsAccountTransaction")
+	public String getByCategory(Model model,@RequestParam("savingsAccNo") int savingsAccNo ) {
+		
+				
+		return paginateReportBySavingsAccNo(1,model,savingsAccNo);
+		
+	}
+	
+	@GetMapping("/SavingsAccountTransaction/{pageNo}")
+	public String paginateReportBySavingsAccNo(@PathVariable(value="pageNo") int pageNo,Model model,
+			@RequestParam("savingsAccNo") int savingsAccNo ) 
+	{		
+		int reportCount = 5;
+		Page<SavingsAccountTransaction> page = savingsAccTransactionService.findByAccountNum(savingsAccNo,pageNo, reportCount);
+		List<SavingsAccountTransaction> listOfSavingsAccountTransaction = page.getContent();		
+		model.addAttribute("activePage",pageNo);
+		model.addAttribute("totalPages",page.getTotalPages());
+		model.addAttribute("totalRecords",page.getTotalElements());
+		model.addAttribute("listOfSavingsAccountTransaction",listOfSavingsAccountTransaction);
+		model.addAttribute("paginate","Category");
+		productCategoryList = productCategoryService.getAllProductCategory(); 
+		model.addAttribute("productCategoryList",productCategoryList);
+//		model.addAttribute("lastselected", categoryId);
+		return "viewPurchaseReport";
+	}
+
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>View Products</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link th:rel="stylesheet" th:href="@{/mystyle.css}" />
+</head>
+
+<body>
+<header th:insert="fragments/header" hidden=""></header>
+<header th:replace="fragments/header"></header>
+	
+<div th:if="${session.UserName != null}">	
+	
+	<div class="container my-2">
+
+
+
+		<h1>Transaction Details</h1>
+
+		<hr>
+		<br>
+		<div th:if="${totalRecords != 0}">
+			<table border="1" class="table table-striped table-responsive-md">
+				<thead>
+					<tr>
+						<th>Transaction Id</th>
+						<th>Transaction Date</th>
+						<th>From</th>
+						<th>To</th>
+						<th>Previous Balance</th>
+						<th>Account Balance</th>						
+						<th>Credit/Debit</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="accountTransactionDetail : ${listOfAccountTransaction}">
+						<td th:text="${accountTransactionDetail.transactionId}"></td>
+						<td th:text="${accountTransactionDetail.date}"></td>
+						<td th:text="${accountTransactionDetail.fromAccount}"></td>
+						<td th:text="${accountTransactionDetail.toAccount}"></td>
+						<td th:text="${accountTransactionDetail.prevBalance}"></td>
+						<td th:text="${accountTransactionDetail.availableBalance}"></td>
+						<td th:text="${accountTransactionDetail.transactionType}"></td>
+					
+					</tr>
+
+				</tbody>
+			</table>
+
+			<div th:if="${totalPages > 1}">
+				<div th:switch="${paginate}">
+				
+					<div th:case="savings">
+						<ul class="pagination">
+							<span th:each="index : ${#numbers.sequence(1,totalPages)}">
+								<li class="page-item"><a class="page-link"
+									th:href="@{'/SavingsAccountTransaction/'+${index}+'?TransactionAccNo='+${AccNO}}">[[${index}]]</a></li>
+							</span>
+						</ul>
+					</div>
+					<div th:case="primary">
+						<ul class="pagination">
+							<span th:each="index : ${#numbers.sequence(1,totalPages)}">
+								<li class="page-item"><a class="page-link"
+									th:href="@{'/CurrentAccountTransaction/'+${index}+'?TransactionAccNo='+${AccNO}}">[[${index}]]</a></li>
+							</span>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div th:if="${totalRecords == 0}">
+		<h2>No Transactions Done !!!!!!!!</h2>
+	</div>
+	</div>
+</div>
+	
+</body>
+</html>

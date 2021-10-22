@@ -1,0 +1,11 @@
+package com.ICINBank.ICINbanking.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.ICINBank.ICINbanking.model.CurrentAccountTransaction;
+
+public interface CurrentAccountTransactionRepository extends JpaRepository<CurrentAccountTransaction, Integer>{
+	
+	public CurrentAccountTransaction findByCurrentActNo(int currentActNo);
+
+}

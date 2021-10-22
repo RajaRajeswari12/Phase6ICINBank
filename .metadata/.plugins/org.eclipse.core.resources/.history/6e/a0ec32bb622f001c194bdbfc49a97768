@@ -1,0 +1,23 @@
+package com.ICINBank.ICINbanking.serviceImpl;
+
+import org.springframework.data.domain.Page;
+
+import com.ICINBank.ICINbanking.model.CurrentAccountTransaction;
+import com.ICINBank.ICINbanking.service.CurrentAccountTransactionService;
+
+public class CurrentAccountTransactionServiceImpl implements CurrentAccountTransactionService{
+
+	@Override
+	public Page<CurrentAccountTransaction> findByCurrentAccountNum(int savingActNo, int pageNo, int reportCount) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CurrentAccountTransaction saveCurrentAccountTransaction(
+			CurrentAccountTransaction currentAccountTransaction) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

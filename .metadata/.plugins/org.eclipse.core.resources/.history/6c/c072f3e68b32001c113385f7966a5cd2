@@ -1,0 +1,9 @@
+package com.ICINBank.ICINbanking.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.ICINBank.ICINbanking.model.DepositOrWithdraw;
+
+public interface DepositOrWithdrawRepository extends JpaRepository<DepositOrWithdraw, Integer> {
+
+}

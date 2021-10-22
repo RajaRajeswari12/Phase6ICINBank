@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Deposit</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+</head>
+<header th:insert="fragments/header" ></header>
+<body>
+
+<div class="container col-md-8 col-md-offset-3" style="overflow: auto">
+	
+
+		<form th:action="@{/requestChequeBook}" th:object="${chequeBook}"
+			method="POST">
+			
+		<h1>	Deposit Amount </h1>
+			<div class="form-group">
+				
+					<label for="accountType">Choose Account Type:</label>
+
+					<select class="btn btn-info dropdown-toggle " name="accountType" id="accountType" data-bs-toggle="dropdown">
+					  <option class="dropdown-item"  th:value="primary">Primary</option>
+					  <option class="dropdown-item"  th:value="savings">Savings</option>
+					  
+					</select>
+			</div>
+
+			<div class="form-group">
+				<label for="Amount">Enter Amount </label> <input type="number"
+					class="form-control" th:field="*{Amount}" />
+				<p th:if="${#fields.hasErrors('Amount')}"
+					th:errorclass="error" th:errors="*{Amount}" />
+			</div>
+			
+
+			
+		
+			
+			
+				<button type="submit" class="btn btn-secondary">Deposit</button>
+				
+			
+		</form>
+
+
+	</div>
+
+</body>
+</html>

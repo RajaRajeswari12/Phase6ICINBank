@@ -1,0 +1,5 @@
+package com.ICINBank.ICINbanking.serviceImpl;
+
+public class CurrentAccountTransactionServiceImpl implements CurrentAccountTransactionService{
+
+}

@@ -1,0 +1,25 @@
+package com.ICINBank.ICINbanking.model;
+
+import java.util.Date;
+
+import javax.persistence.Entity;
+
+import lombok.Data;
+
+@Entity
+@Data
+public class DepositOrWithdraw {
+	
+	private int id;
+	
+	private int AccountNum;
+	
+	private String customerName;
+	
+	private Date requestRaisedDate;
+	
+	private Date requestApprovedDate;
+	
+	private String actionType;
+
+}

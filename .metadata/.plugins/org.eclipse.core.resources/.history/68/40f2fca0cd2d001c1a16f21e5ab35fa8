@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.thymeleaf.org ">
+  <head>
+<meta charset="ISO-8859-1">
+<title>User Home Page</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<style>
+.error {
+	color: red;
+}
+</style>
+</head>
+ 
+<header th:replace="fragments/header"></header>
+
+<body>
+
+
+<form th:object="${authCustomer}" method="POST"></form>
+<div style="height: 100px;width: 300px; padding: 10px;border: 1px; ">
+<div style="height: 70px;width: 300px;border: 1px;background-color: aqua;">
+
+<p th:text="'Primary Account Balance: ' +${authCustomer.currentAccount.amount}"></p>
+
+</div>
+<div style="height: 30px;width: 300px;border: 1px;">
+
+<p>View Details:    <a href="#">
+          <span class="glyphicon glyphicon-circle-arrow-right"></span>
+        </a></p>
+</div>
+</div>
+<br>
+<div style="height: 300px;width: 300px; padding: 10px;"></div>
+</body>
+</html>

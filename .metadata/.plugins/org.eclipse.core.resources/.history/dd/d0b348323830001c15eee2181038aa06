@@ -1,0 +1,15 @@
+package com.ICINBank.ICINbanking.service;
+
+import com.ICINBank.ICINbanking.model.Customer;
+import com.ICINBank.ICINbanking.model.User;
+
+public interface CustomerService {
+//	public String generateAccountNumber();
+	
+	public Customer findByUserName(String userName);
+	
+	public Customer registerNewCustomer(Customer customer);
+	
+	
+
+}

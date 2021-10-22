@@ -1,0 +1,22 @@
+package com.ICINBank.ICINbanking.serviceImpl;
+
+import org.springframework.stereotype.Service;
+
+import com.ICINBank.ICINbanking.POJO.DepositOrWithdrawPOJO;
+import com.ICINBank.ICINbanking.model.DepositOrWithdraw;
+import com.ICINBank.ICINbanking.service.DepositOrWithdrawService;
+
+@Service
+public class DepositOrWithdrawServiceImpl implements DepositOrWithdrawService {
+
+	@Override
+	public DepositOrWithdraw saveDepositOrWithdraw(DepositOrWithdrawPOJO depositOrWithdrawPojo,Customer customer) {
+		DepositOrWithdraw depositOrWithdraw = new DepositOrWithdraw();
+		depositOrWithdraw.setAccountNum(0);
+		
+		return null;
+	}
+
+	
+	
+}

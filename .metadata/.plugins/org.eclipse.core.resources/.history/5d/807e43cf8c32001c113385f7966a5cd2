@@ -1,0 +1,5 @@
+package com.ICINBank.ICINbanking.POJO;
+
+public class DepositOrWithdrawPOJO {
+
+}

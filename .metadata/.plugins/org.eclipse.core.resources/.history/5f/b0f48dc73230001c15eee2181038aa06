@@ -1,0 +1,10 @@
+package com.ICINBank.ICINbanking.service;
+
+import com.ICINBank.ICINbanking.model.CurrentAccount;
+
+public interface CurrentAccountService {
+	public CurrentAccount createNewCurrentAccount();
+	public CurrentAccount transferFromCurrentAccount(int fromAccountNo, int toAccountNo, double amount,String accType);
+	public CurrentAccount saveCurrentAccount(CurrentAccount currentAccount);
+
+}

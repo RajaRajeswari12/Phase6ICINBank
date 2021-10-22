@@ -1,0 +1,5 @@
+package com.ICINBank.ICINbanking.service;
+
+public interface CurrentAccountTransactionService {
+
+}

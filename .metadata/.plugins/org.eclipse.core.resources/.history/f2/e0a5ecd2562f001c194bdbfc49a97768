@@ -1,0 +1,71 @@
+package com.ICINBank.ICINbanking.serviceImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ICINBank.ICINbanking.model.CurrentAccount;
+import com.ICINBank.ICINbanking.model.SavingsAccount;
+import com.ICINBank.ICINbanking.repository.CurrentAccountRepository;
+import com.ICINBank.ICINbanking.repository.SavingsAccountRepository;
+import com.ICINBank.ICINbanking.service.SavingsAccountService;
+
+@Service
+public class SavingsAccountServiceImpl implements SavingsAccountService{
+	@Autowired
+	private SavingsAccountRepository savingsAccountRepo;
+	
+	@Autowired
+	private CurrentAccountRepository currentAccRepo;
+
+	@Override
+	public SavingsAccount createNewSavingsAccount()  {
+		SavingsAccount newAccount = new SavingsAccount();		
+		newAccount.setAccountType("savings");
+		return savingsAccountRepo.save(newAccount);	
+		
+	}
+
+	@Override
+	public SavingsAccount transferAmount(int fromAccountNo, int toAccountNo, double amount, String accType) {
+		SavingsAccount fromAcc = savingsAccountRepo.findBySavingsActNo(fromAccountNo);
+		SavingsAccount toAcc = null;
+		CurrentAccount toCurAcc = null ;
+		double fromPrevBalance = fromAcc.getAmount();
+		double fromAvailBalance = fromPrevBalance-amount;
+		
+		
+		double toPrevBalance = 0;
+		double toAvailBalance = 0;
+		if(accType.equalsIgnoreCase("savings")) {
+			toAcc = savingsAccountRepo.findBySavingsActNo(toAccountNo);	
+			toPrevBalance = toAcc.getAmount();
+			 toAvailBalance = toPrevBalance+amount;
+			
+		}else if(accType.equalsIgnoreCase("current")) {
+			toCurAcc = currentAccRepo.findByCurrentActNo(toAccountNo);
+			toPrevBalance = toCurAcc.getAmount();
+			 toAvailBalance = toPrevBalance+amount;
+		}
+		
+		
+		
+		
+		
+		
+		
+		return null;
+	}
+	
+	public SavingsAccount setAccountDetails(SavingsAccount savAccount,Double amount) {
+		savAccount.setAmount(amount);
+		return savAccount;
+	}
+	
+	
+	public SavingsAccount saveSavingsAccount(SavingsAccount saveAccount) {
+		
+		return savingsAccountRepo.save(saveAccount);
+		
+	}
+
+}

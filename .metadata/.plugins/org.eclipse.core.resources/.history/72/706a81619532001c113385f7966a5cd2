@@ -1,0 +1,19 @@
+package com.ICINBank.ICINbanking.serviceImpl;
+
+import org.springframework.stereotype.Service;
+
+import com.ICINBank.ICINbanking.model.DepositOrWithdraw;
+import com.ICINBank.ICINbanking.service.DepositOrWithdrawService;
+
+@Service
+public class DepositOrWithdrawServiceImpl implements DepositOrWithdrawService {
+
+	@Override
+	public DepositOrWithdraw saveDepositOrWithdraw(DepositOrWithdraw depositOrWithdraw) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	
+}

@@ -1,0 +1,10 @@
+package com.ICINBank.ICINbanking.serviceImpl;
+
+import org.springframework.stereotype.Service;
+
+import com.ICINBank.ICINbanking.service.DepositOrWithdrawService;
+
+@Service
+public class DepositOrWithdrawServiceImpl implements DepositOrWithdrawService {
+
+}

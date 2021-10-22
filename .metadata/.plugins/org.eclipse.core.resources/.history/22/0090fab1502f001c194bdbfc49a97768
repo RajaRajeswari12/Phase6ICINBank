@@ -1,0 +1,12 @@
+package com.ICINBank.ICINbanking.service;
+
+import com.ICINBank.ICINbanking.model.SavingsAccount;
+public interface SavingsAccountService {
+	
+
+	
+	public SavingsAccount createNewSavingsAccount();
+	public SavingsAccount transferAmount(int fromAccountNo, int toAccountNo, float amount,String accType);
+
+
+}

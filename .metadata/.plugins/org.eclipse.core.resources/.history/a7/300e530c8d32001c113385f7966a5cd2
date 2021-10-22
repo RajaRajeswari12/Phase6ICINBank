@@ -1,0 +1,22 @@
+package com.ICINBank.ICINbanking.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.ICINBank.ICINbanking.POJO.DepositOrWithdrawPOJO;
+import com.ICINBank.ICINbanking.model.DepositOrWithdraw;
+
+@Controller
+public class DepositOrWithdrawController {
+	
+	@GetMapping("/depositFund")
+	public ModelAndView goToDepositPage() {
+		ModelAndView depositMV = new ModelAndView();
+		depositMV.addObject("", new DepositOrWithdrawPOJO());
+		depositMV.setViewName("Deposit");
+		
+		return depositMV;
+	}
+
+}

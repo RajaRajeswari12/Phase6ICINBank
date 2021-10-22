@@ -1,0 +1,17 @@
+package com.ICINBank.ICINbanking.serviceImpl;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import com.ICINBank.ICINbanking.model.SavingsAccountTransaction;
+import com.ICINBank.ICINbanking.service.SavingsAccountTransactionService;
+
+public class SavingsAccountTransactionServiceImpl implements SavingsAccountTransactionService {
+
+	@Override
+	public Page<SavingsAccountTransaction> findByAccountNum(int savingActNo, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

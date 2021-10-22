@@ -1,0 +1,7 @@
+package com.ICINBank.ICINbanking.serviceImpl;
+
+import com.ICINBank.ICINbanking.service.DepositOrWithdrawService;
+
+public class DepositOrWithdrawServiceImpl implements DepositOrWithdrawService {
+
+}

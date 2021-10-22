@@ -1,0 +1,27 @@
+package com.ICINBank.ICINbanking.model;
+
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import lombok.Data;
+
+@Entity
+@Data
+public class SavingsAccountTransaction {
+	
+	@Id
+	@GeneratedValue
+	private int transactionId;
+	
+	@OneToMany
+	private SavingsAccount accNo;
+	private Date date;
+	private Long prevBalance;
+	private Long newBalance;
+	private String transactionType;
+
+}

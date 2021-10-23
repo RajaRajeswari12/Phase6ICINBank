@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Deposit Withdraw Request List</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link th:rel="stylesheet" th:href="@{/mystyle.css}" />
+</head>
+
+<body>
+
+<header th:replace="fragments/adminHeader"></header>
+	
+<div th:if="${session.AdminName != null}">	
+	
+	<div class="container my-2">
+
+
+
+		<h1>Deposit Withdraw Request List</h1>
+
+		<hr>
+		<br>
+		<div th:if="${totalRecords != 0}">
+			<table border="1" class="table table-striped table-responsive-md">
+				<thead>
+					<tr>
+						<th>Account</th>
+						<th>Customer Name</th>
+						<th>Account Type</th>
+						<th>Amount</th>
+						<th>Request Raised Date</th>
+						<th>Request Approved Date</th>						
+						<th>Request Type</th>
+						<th>Status</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="depositOrWithdraw : ${listOfDepositOrWithdrawReq}">
+						<td th:text="${depositOrWithdraw.AccountNum}"></td>
+						<td th:text="${depositOrWithdraw.customerName}"></td>
+						<td th:text="${depositOrWithdraw.accountType}"></td>
+						<td th:text="${depositOrWithdraw.amount}"></td>
+						<td th:text="${depositOrWithdraw.requestRaisedDate}"></td>
+						<td th:text="${depositOrWithdraw.requestApprovedDate}"></td>
+						<td th:text="${depositOrWithdraw.actionType}"></td>
+						
+						<td>
+							<div th:switch="${depositOrWithdraw.status}"> 
+										  <a th:case="pending"  th:href="@{'/depositOrWithdrawApproval/?id={id}&pageNo='+${activePage}(id=${chequeBkReq.id})}">Approve</a>
+										   <a th:case="pending"  th:href="@{'/depositOrWithdrawApproval/?id={id}&pageNo='+${activePage}(id=${chequeBkReq.id})}">Reject</a>
+										 
+										  <a th:case="approved">Confirmed</a>
+							</div>						
+						</td>
+						
+					</tr>
+
+				</tbody>
+			</table>
+
+			<div th:if="${totalPages > 1}">
+				
+						<ul class="pagination">
+							<span th:each="index : ${#numbers.sequence(1,totalPages)}">
+								<li class="page-item"><a class="page-link"
+									th:href="@{'/viewDepositWithdrawReqLst/'+${index}}">[[${index}]]</a></li>
+							</span>
+						</ul>
+					
+
+			</div>
+		</div>
+		<div th:if="${totalRecords == 0}">
+		<h2>No Transactions Done !!!!!!!!</h2>
+	</div>
+	</div>
+</div>
+	
+</body>
+</html>

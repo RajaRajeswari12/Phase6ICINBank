@@ -8,7 +8,7 @@ public interface ChequeBookService {
 	
 	public ChequeBook createChequeBookRequest(ChequeBook chequeBook);
 	
-	public ChequeBook chequeBookApproval(ChequeBook chequeBook);
+	public ChequeBook chequeBookApproval(int chequeBookId);
 	
 	Page<ChequeBook> findAllChequeBookRequest(int pageNo, int requestCount);
 

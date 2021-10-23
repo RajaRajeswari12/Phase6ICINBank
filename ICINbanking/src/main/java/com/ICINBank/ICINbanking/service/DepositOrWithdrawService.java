@@ -11,5 +11,9 @@ public interface DepositOrWithdrawService {
 	public DepositOrWithdraw saveDepositOrWithdraw(DepositOrWithdrawPOJO depositOrWithdrawPojo,Customer customer);
 	
 	Page<DepositOrWithdraw> findAllDepositOrWithdrawRequest(int pageNo, int requestCount);
+	
+	void doDepositOrWithdraw(int id);
+	
+	void cancelDepositOrWithdraw(int id);
 
 }

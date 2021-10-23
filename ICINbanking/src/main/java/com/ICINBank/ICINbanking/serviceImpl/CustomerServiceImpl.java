@@ -69,6 +69,14 @@ public class CustomerServiceImpl implements CustomerService{
 		Pageable pageable = PageRequest.of(pageNo-1, userCount);
 		return customerRepo.findAll(pageable);
 	}
+
+	@Override
+	public Customer enableDisableUserAcc(int userId) {
+		Customer customer = customerRepo.getById(userId);
+		customer.getUser().setActive(!customer.getUser().isActive());
+		
+		return customerRepo.save(customer);
+	}
 	
 	
 //	@Override

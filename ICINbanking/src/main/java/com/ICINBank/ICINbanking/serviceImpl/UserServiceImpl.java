@@ -35,6 +35,8 @@ public class UserServiceImpl implements UserService{
 			}				
 			else if(!getValidUser.getRole().equalsIgnoreCase("user")) {
 				errorMessage = "Authorization Required";
+			}else if(!getValidUser.isActive()) {
+				errorMessage = "User Account is disabled";
 			}
 		}else {
 			errorMessage = "Username doesn't exist.";			
@@ -59,6 +61,8 @@ public class UserServiceImpl implements UserService{
 			}				
 			else if(!getValidUser.getRole().equalsIgnoreCase("admin")) {
 				errorMessage = "Authorization Required";
+			}else if(!getValidUser.isActive()) {
+				errorMessage = "Admin Account is disabled";
 			}
 		}else {
 			errorMessage = "Username doesn't exist.";			

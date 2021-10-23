@@ -65,5 +65,15 @@ public class CustomerController {
 		return userLogOutMV;
 	}
 
+	@GetMapping(value="/logOut")
+	public ModelAndView adminlogOutSession(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		session.removeAttribute("AdminName");
+		session.invalidate();
+		ModelAndView userLogOutMV = new ModelAndView();
+		userLogOutMV.setViewName("adminLogin");
+		userLogOutMV.addObject("user",new User());
+		return userLogOutMV;
+	}
 
 }

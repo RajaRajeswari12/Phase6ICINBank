@@ -35,10 +35,12 @@
 						<th>Account</th>
 						<th>Customer Name</th>
 						<th>Account Type</th>
+						<th>Amount</th>
 						<th>Request Raised Date</th>
 						<th>Request Approved Date</th>						
 						<th>Request Type</th>
-						<th>Status</th>
+						<th>Approve</th>
+						<th>Disapprove</th>
 						
 					</tr>
 				</thead>
@@ -47,14 +49,24 @@
 						<td th:text="${depositOrWithdraw.AccountNum}"></td>
 						<td th:text="${depositOrWithdraw.customerName}"></td>
 						<td th:text="${depositOrWithdraw.accountType}"></td>
+						<td th:text="${depositOrWithdraw.amount}"></td>
 						<td th:text="${depositOrWithdraw.requestRaisedDate}"></td>
 						<td th:text="${depositOrWithdraw.requestApprovedDate}"></td>
 						<td th:text="${depositOrWithdraw.actionType}"></td>
 						
 						<td>
 							<div th:switch="${depositOrWithdraw.status}"> 
-										  <a th:case="pending"  href="#">Confirm</a>
-										  <a th:case="approved">Confirmed</a>
+								<a th:case="pending"  th:href="@{'/depositOrWithdrawApproval/?id={id}&pageNo='+${activePage}(id=${depositOrWithdraw.id})}">Approve</a>
+								<a th:case="Approved">Confirmed</a>
+								<a th:case="Rejected">Rejected</a>
+							</div>						
+						</td>
+						
+							<td>
+							<div th:switch="${depositOrWithdraw.status}"> 								
+								<a th:case="pending"  th:href="@{'/depositOrWithdrawDisapproval/?id={id}&pageNo='+${activePage}(id=${depositOrWithdraw.id})}">Reject</a>
+								<a th:case="Approved">Confirmed</a>
+								<a th:case="Rejected">Rejected</a>
 							</div>						
 						</td>
 						

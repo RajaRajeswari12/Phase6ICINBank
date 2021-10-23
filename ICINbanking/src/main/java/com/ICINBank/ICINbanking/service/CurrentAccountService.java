@@ -9,5 +9,7 @@ public interface CurrentAccountService {
 	public void transferFromCurrentAccount(TransferDetailPOJO transferDetails);
 	public CurrentAccount findByCurrentAccNum(int acctNum);	
 	public CurrentAccount saveCurrentAccount(CurrentAccount currentAccount);
+	
+	public void saveCurrentTransaction(int accNo,TransferDetailPOJO transferDetails,String creditOrDebit);
 
 }

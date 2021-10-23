@@ -81,5 +81,32 @@ public class DepositOrWithdrawController {
 		return "viewMoneyTransferRequest";
 	}
 	
+	@GetMapping("/depositOrWithdrawApproval")
+	public String depositOrWithdrawAmount(@RequestParam(value="id") int id,@RequestParam(value="pageNo") int pageNo,Model model) {
+		
+//		log.info("Entered Cheque Book Approval Function");
+		
+		depositOrWithdrawService.doDepositOrWithdraw(id);
+		
+	
+		
+		return paginateViewDepositWithdrawReqList(pageNo,model);
+		
+		
+	}
+	
+	@GetMapping("/depositOrWithdrawDisapproval")
+	public String depositOrWithdrawAmountDisapprove(@RequestParam(value="id") int id,@RequestParam(value="pageNo") int pageNo,Model model) {
+		
+//		log.info("Entered Cheque Book Approval Function");
+		
+		depositOrWithdrawService.cancelDepositOrWithdraw(id);
+		
+	
+		
+		return paginateViewDepositWithdrawReqList(pageNo,model);
+		
+		
+	}
 
 }

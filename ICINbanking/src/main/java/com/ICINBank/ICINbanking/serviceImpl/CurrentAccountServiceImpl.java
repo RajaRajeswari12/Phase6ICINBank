@@ -41,42 +41,18 @@ public class CurrentAccountServiceImpl implements CurrentAccountService{
 
 	@Override
 	public void transferFromCurrentAccount(TransferDetailPOJO transferDetails) {
-		CurrentAccount fromAcc = currentAccountRepo.findByCurrentActNo(transferDetails.getFromAccNo());
-		SavingsAccount toAcc = null;
-		CurrentAccount toCurAcc = null ;
-		double fromPrevBalance = fromAcc.getAmount();
-		double fromAvailBalance = fromPrevBalance-transferDetails.getAmountToBeTranfered();
-		
-		
-		double toPrevBalance = 0;
-		double toAvailBalance = 0;
+
+		saveCurrentTransaction(transferDetails.getFromAccNo(), transferDetails, "Debit");
 		if(transferDetails.getToAccType().equalsIgnoreCase("savings")) {
-			toAcc = savingsAccService.findBySavingsAccNum(transferDetails.getToAccNo());	
-			toPrevBalance = toAcc.getAmount();
-			 toAvailBalance = toPrevBalance+transferDetails.getAmountToBeTranfered();
-			 toAcc.setAmount(toAvailBalance);
-			 
-			 SavingsAccountTransaction srt = new SavingsAccountTransaction(toAcc,transferDetails.getFromAccNo(),transferDetails.getToAccNo(),new Date(),toPrevBalance,toAvailBalance,"Credit");
-			 srtService.saveSavingsAccountTrans(srt);
-			 savingsAccService.saveSavingsAccount(toAcc);
+		
+			 savingsAccService.saveSavingsTransaction(transferDetails.getToAccNo(),transferDetails,"Credit");
 			 
 			
 		}else if(transferDetails.getToAccType().equalsIgnoreCase("primary")) {
-			toCurAcc = currentAccountRepo.findByCurrentActNo(transferDetails.getToAccNo());
-			toPrevBalance = toCurAcc.getAmount();
-			 toAvailBalance = toPrevBalance+transferDetails.getAmountToBeTranfered();
-			 toCurAcc.setAmount(toAvailBalance);
-			 CurrentAccountTransaction crt = new CurrentAccountTransaction(fromAcc,transferDetails.getFromAccNo(),transferDetails.getToAccNo(),new Date(),toPrevBalance,toAvailBalance,"Credit");
-			 crtService.saveCurrentAccountTransaction(crt);
-			 saveCurrentAccount(toCurAcc);
+			saveCurrentTransaction(transferDetails.getToAccNo(), transferDetails, "Credit");
 		}
 		
-		fromAcc.setAmount(fromAvailBalance);
-		
-		 CurrentAccountTransaction crt = new CurrentAccountTransaction(fromAcc,transferDetails.getFromAccNo(),transferDetails.getToAccNo(),new Date(),fromPrevBalance,fromAvailBalance,"Debit");
-		 crtService.saveCurrentAccountTransaction(crt);
-		
-		 saveCurrentAccount(fromAcc);
+	
 		
 		
 		
@@ -96,8 +72,26 @@ public class CurrentAccountServiceImpl implements CurrentAccountService{
 
 	@Override
 	public CurrentAccount findByCurrentAccNum(int acctNum) {
-		// TODO Auto-generated method stub
+	
 		return currentAccountRepo.findByCurrentActNo(acctNum);
+	}
+
+	@Override
+	public void saveCurrentTransaction(int accNo, TransferDetailPOJO transferDetails, String creditOrDebit) {
+		CurrentAccount currentAccount = findByCurrentAccNum(accNo);
+//		log.info("Inside saveCurrentTransaction &&&&&&&&&&&&"+accNo) ;
+		double prevBalance = currentAccount.getAmount();
+		double availBalance = 0;
+		if(creditOrDebit.equalsIgnoreCase("credit")) {
+			availBalance = prevBalance+transferDetails.getAmountToBeTranfered();
+		}else if(creditOrDebit.equalsIgnoreCase("debit")) {
+			availBalance = prevBalance-transferDetails.getAmountToBeTranfered();
+		}
+		currentAccount.setAmount(availBalance);
+		CurrentAccountTransaction crt = new CurrentAccountTransaction(currentAccount,transferDetails.getFromAccNo(),transferDetails.getToAccNo(),new Date(),prevBalance,availBalance,creditOrDebit);
+		 crtService.saveCurrentAccountTransaction(crt);
+		 saveCurrentAccount(currentAccount);
+		
 	}
 
 }

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.ICINBank.ICINbanking.model.Customer;
 import com.ICINBank.ICINbanking.service.CustomerService;
 
@@ -37,6 +39,19 @@ public class AdminController {
 		
 		return "viewUserDetails";
 	}
+	
+	@GetMapping("/userAccountHandler")
+	public String enableOrDisableUserAccount(@RequestParam(value="id") int id,@RequestParam(value="pageNo") int pageNo,Model model) {
+		
+//		log.info("Entered Cheque Book Approval Function");
+		
+		customerService.enableDisableUserAcc(id);
+		
+		return paginateViewUserDetail(pageNo,model);
+		
+		
+	}
+	
 	
 
 }

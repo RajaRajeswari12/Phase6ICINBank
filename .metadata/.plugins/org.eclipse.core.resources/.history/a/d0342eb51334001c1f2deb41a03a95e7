@@ -1,0 +1,25 @@
+package com.ICINBank.ICINbanking.service;
+
+import java.util.Date;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import com.ICINBank.ICINbanking.model.SavingsAccount;
+import com.ICINBank.ICINbanking.model.SavingsAccountTransaction;
+
+public interface SavingsAccountTransactionService {
+
+	
+	Page<SavingsAccountTransaction> findByAccountNum(int savingActNo,int pageNo, int reportCount);
+	
+	public SavingsAccountTransaction saveSavingsAccountTrans(SavingsAccount savingsAcc, int fromAccount, int toAccount, Date date,
+			Double prevBalance, Double availableBalance, String transactionType);
+	
+	
+	
+//	public SavingsAccountTransaction setSavingsAccountTransaction();
+	
+	
+
+}

@@ -84,5 +84,24 @@ public class UserController {
 		userDetailMV.setViewName("homePage");
 		return userDetailMV;
 	}
+	
+	@GetMapping(value="/adminHome")
+	public ModelAndView goToAdminHomePage(HttpServletRequest request) {
+		ModelAndView userDetailMV= new ModelAndView();
+//		Customer cust = customerService.getCustomerBySessionVar(request);
+//		userDetailMV.addObject("authCustomer", cust);
+		userDetailMV.setViewName("adminHomePage");
+		return userDetailMV;
+	}
+	
+	
+	@GetMapping(value="/viewProfile")
+	public ModelAndView goToProfilePage(HttpServletRequest request) {
+		ModelAndView userDetailMV= new ModelAndView();
+		Customer cust = customerService.getCustomerBySessionVar(request);
+		userDetailMV.addObject("customer", cust);
+		userDetailMV.setViewName("ViewCustomerDetail");
+		return userDetailMV;
+	}
 
 }

@@ -23,7 +23,8 @@ public class ChequeBookServiceImpl implements ChequeBookService {
 	}
 
 	@Override
-	public ChequeBook chequeBookApproval(ChequeBook chequeBook) {
+	public ChequeBook chequeBookApproval(int chequeBookId) {
+		ChequeBook chequeBook = chequeBookRepo.getById(chequeBookId);
 		chequeBook.setStatus("approved");
 		
 		return chequeBookRepo.save(chequeBook);

@@ -29,5 +29,7 @@ public class DepositOrWithdraw {
 	private String accountType;
 	
 	private String status;
+	
+	private Double amount;
 
 }

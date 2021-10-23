@@ -57,8 +57,8 @@
 						<a th:if="!${userDetail.user.active}">Disabled</a>
 						</td>
 						<td>
-						<a th:if="${userDetail.user.active}" href="#">Disable</a>
-						<a th:if="!${userDetail.user.active}" href="#">Enable</a>
+						<a th:if="${userDetail.user.active}" th:href="@{'/userAccountHandler/?id={id}&pageNo='+${activePage}(id=${userDetail.id})}">Disable</a>
+						<a th:if="!${userDetail.user.active}" th:href="@{'/userAccountHandler/?id={id}&pageNo='+${activePage}(id=${userDetail.id})}">Enable</a>
 						</td>
 					</tr>
 

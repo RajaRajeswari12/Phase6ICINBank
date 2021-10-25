@@ -72,7 +72,7 @@ public class ChequeBookController {
 	@GetMapping("/viewChequeBookList/{pageNo}")
 	public String paginateViewChequeBookReqList(@PathVariable(value="pageNo") int pageNo,Model model ) 
 	{		
-		log.info("Entered Pagination Function");
+		log.info("Entered paginateViewChequeBookReqList Function");
 		int requestCount = 10;
 		Page<ChequeBook> page = chequeBookService.findAllChequeBookRequest(pageNo, requestCount);
 		List<ChequeBook> listOfChequeBookReq = page.getContent();		
@@ -80,7 +80,6 @@ public class ChequeBookController {
 		model.addAttribute("totalPages",page.getTotalPages());
 		model.addAttribute("totalRecords",page.getTotalElements());
 		model.addAttribute("listOfChequeBookReq",listOfChequeBookReq);
-//		log.info("Paginated Result"+listOfChequeBookReq);
 		return "viewChequeBkRequestList";
 	}
 	

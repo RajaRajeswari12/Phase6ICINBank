@@ -80,7 +80,9 @@ public class UserController {
 	public ModelAndView goToHomePage(HttpServletRequest request) {
 		ModelAndView userDetailMV= new ModelAndView();
 		Customer cust = customerService.getCustomerBySessionVar(request);
-		userDetailMV.addObject("authCustomer", cust);
+		if(cust != null) {
+			userDetailMV.addObject("authCustomer", cust);
+		}
 		userDetailMV.setViewName("homePage");
 		return userDetailMV;
 	}
@@ -88,8 +90,7 @@ public class UserController {
 	@GetMapping(value="/adminHome")
 	public ModelAndView goToAdminHomePage(HttpServletRequest request) {
 		ModelAndView userDetailMV= new ModelAndView();
-//		Customer cust = customerService.getCustomerBySessionVar(request);
-//		userDetailMV.addObject("authCustomer", cust);
+
 		userDetailMV.setViewName("adminHomePage");
 		return userDetailMV;
 	}

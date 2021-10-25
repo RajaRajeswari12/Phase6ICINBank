@@ -1,0 +1,9 @@
+NotEmpty=This field is required.
+Size.customer.UserName=Please use between 6 and 20 characters.
+Duplicate.adminUser.adminUserName=Someone already has that username.
+Size.adminUser.adminPassword=Try one with at least 8 characters.
+Diff.adminUser.adminPasswordConfirm=These passwords don't match.
+wrong.Account= Wrong Account number/Wrong Account Type [Verify the account number]
+Valid.Amount=Enter valid amount
+Exceeds=Amount exceeds the limit
+insufficient=Insufficient Funds

@@ -18,5 +18,7 @@ public class TransferDetailPOJO {
 	private boolean isCurrentAcc;
 	
 	private boolean isSavingsAcc;
+	
+	private String userName;
 
 }

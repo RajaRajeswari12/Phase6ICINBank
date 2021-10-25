@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 
 import com.ICINBank.ICINbanking.POJO.DepositOrWithdrawPOJO;
 import com.ICINBank.ICINbanking.POJO.TransferDetailPOJO;
@@ -94,6 +96,33 @@ public class DepositOrWithdrawServiceImpl implements DepositOrWithdrawService {
 		depositOrWithdraw.setRequestApprovedDate(new Date());
 		depositOrWithdraw.setStatus("Rejected");
 		depositOrWithdrawRepo.save(depositOrWithdraw);
+	}
+
+	@Override
+	public void validateDepositOrWithdrawPage(DepositOrWithdrawPOJO depositOrWithdrawPOJO,
+			BindingResult bindingResult,Customer customer) {
+		String errorMessage = null;
+
+		if(depositOrWithdrawPOJO.getAmount() <= 0) {
+			errorMessage = "Enter Valid Amount";
+		}else if(depositOrWithdrawPOJO.getAmount() >= 200000) {
+			errorMessage="Amount exceeds the limit";
+		}else if(depositOrWithdrawPOJO.getActionType().equalsIgnoreCase("withdraw")) {
+			if(depositOrWithdrawPOJO.getAccountType().equalsIgnoreCase("savings") && (depositOrWithdrawPOJO.getAmount() > customer.getSavingsAccount().getAmount())) {
+				errorMessage="Insufficient Amount";
+			}else if(depositOrWithdrawPOJO.getAccountType().equalsIgnoreCase("primary") && (depositOrWithdrawPOJO.getAmount() > customer.getCurrentAccount().getAmount())) {
+				errorMessage="Insufficient Amount";
+			}
+			
+		}
+		
+		String objName=depositOrWithdrawPOJO.getActionType()+"Error";
+			
+		if(errorMessage != null) {
+			ObjectError error = new ObjectError("depositOrWithdrawPOJOError",errorMessage);
+			bindingResult.addError(error);
+		}
+		
 	}
 
 	

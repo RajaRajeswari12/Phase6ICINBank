@@ -6,41 +6,44 @@
 <title>User Home Page</title>
 
 	 <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
 <style>
 .error {
 	color: red;
 }
-div {
-  border-style: solid;
-  border-width: thin;
-}
+
 </style>
 </head>
  
 <header th:replace="fragments/header"></header>
 
 <body>
+<div th:if="${session.UserName == null}">
+<h1> Welcome to ICINBank</h1>
+</div>
+<div th:if="${session.UserName != null}">
 
-
-<form th:object="${authCustomer}" method="POST"></form>
-	<div style="height: 100px;width: 300px; padding: 30px; border: 3px; display: inline-block;">
+<form th:object="${authCustomer}" method="POST">
+	<div style="height: 100px;width: 300px; padding: 30px; border: 3px; display: inline-block; ">
 	
-			<div style="height: 70px;width: 300px;background-color: rgb(3, 219, 252);">		
+			<div style="height: 70px;width: 300px;background-color: rgb(3, 219, 252); border-style: solid;
+  border-width: thin;">		
 				<p th:text="'Primary Account Balance: ' +${authCustomer.currentAccount.amount}"></p>		
 			</div>
 			
-			<div style="height: 30px;width: 300px;">
+			<div style="height: 30px;width: 300px;  border-style: solid;
+  border-width: thin;">
 			
 				<p>View Details:   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+				
 				<a th:href="@{'/viewCurrentAccountTransaction/?TransactionAccNo='+${authCustomer.currentAccount.currentActNo}}">
-				          <span class="glyphicon glyphicon-circle-arrow-right"></span>
+				          <span class="fa fa-arrow-circle-right" style="font-size:24px"></span>
 				        </a>
 				</p>
 			</div>
@@ -48,18 +51,19 @@ div {
 	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 	<div style="height: 100px;width: 200px; padding: 30px; border: 3px; display: inline-block;">
 	
-			<div style="height: 70px;width: 200px;background-color: rgb(3, 219, 252);">		
+			<div style="height: 70px;width: 200px;background-color: rgb(3, 219, 252); border-style: solid;
+  border-width: thin;">		
 				<p >Deposit </p>	
-				  <span class="glyphicon glyphicon-credit-card"></span>	
+				    <div class="fa fa-credit-card" style="font-size:24px;"></div>
 			</div>
 			
-			<div style="height: 30px;width: 200px;">
+			<div style="height: 30px;width: 200px; border-style: solid;
+  border-width: thin;">
 			
-				<p> Go To Deposit  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+				<p> Go To Deposit  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 				
 				  <a href="/depositOrWithdrawFund/?actionType=Deposit">
-				         <span class="glyphicon glyphicon-circle-arrow-right"></span>
+				       <span class="fa fa-arrow-circle-right" style="font-size:24px"></span>
 				        </a>
 				</p>
 			</div>
@@ -67,18 +71,19 @@ div {
 	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 	<div style="height: 100px;width: 200px; padding: 30px; border: 3px; display: inline-block;">
 	
-					<div style="height: 70px;width: 200px;background-color: rgb(3, 219, 252);">		
+					<div style="height: 70px;width: 200px;background-color: rgb(3, 219, 252); border-style: solid;
+  border-width: thin;">		
 				<p >Withdraw </p>		
-				 <span class="glyphicon glyphicon-credit-card"></span>
+				 <div class="fa fa-credit-card" style="font-size:24px;"></div>
 			</div>
 			
-			<div style="height: 30px;width: 200px;">
+			<div style="height: 30px;width: 200px; border-style: solid;
+  border-width: thin;">
 			
-				<p> Go To Withdraw  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+				<p> Go To Withdraw  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 	
 				
 				  <a href="/depositOrWithdrawFund/?actionType=WithDraw">
-				          <span class="glyphicon glyphicon-circle-arrow-right"></span>
+				           <span class="fa fa-arrow-circle-right" style="font-size:24px"></span>
 				        </a>
 				</p>
 			</div>
@@ -86,21 +91,23 @@ div {
 <br>
 		<div style="height: 100px;width: 300px; padding: 30px;border: 3px;border-color: black; ">
 	
-			<div style="height: 70px;width: 300px;background-color: rgb(3, 252, 211);">		
+			<div style="height: 70px;width: 300px;background-color: rgb(3, 252, 211); border-style: solid;
+  border-width: thin;">		
 				<p th:text="'Savings Account Balance: ' +${authCustomer.savingsAccount.amount}"></p>		
 			</div>
 			
-			<div style="height: 30px;width: 300px;">
+			<div style="height: 30px;width: 300px; border-style: solid;
+  border-width: thin;">
 			 
 				<p>View Details:  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 				 <a th:href="@{'/viewSavingsAccountTransaction/?TransactionAccNo='+${authCustomer.savingsAccount.savingActNo}}">
-				          <span class="glyphicon glyphicon-circle-arrow-right"></span>
+				          <span class="fa fa-arrow-circle-right" style="font-size:24px"></span>
 				        </a>
 				</p>
 			</div>
+	</div>
+	</form>
 	</div>
 </body>
 </html>

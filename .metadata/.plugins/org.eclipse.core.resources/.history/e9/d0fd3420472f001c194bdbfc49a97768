@@ -1,5 +1,0 @@
-package com.ICINBank.ICINbanking.repository;
-
-public interface CurrentAccountTransactionRepository {
-
-}

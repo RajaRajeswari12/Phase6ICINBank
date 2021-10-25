@@ -7,6 +7,12 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
+		<style>
+.error {
+	color: red;
+	font-weight: bolder;
+}
+</style>
 </head>
 <header th:insert="fragments/header" ></header>
 <body>
@@ -31,14 +37,16 @@
 
 			<div class="form-group">
 				<label for="amount">Enter Amount </label> <input type="number"
-					class="form-control" th:field="*{amount}" />
-				<p th:if="${#fields.hasErrors('amount')}"
-					th:errorclass="error" th:errors="*{amount}" />
+					class="form-control" th:field="*{amount}" />				
 			</div>
 			<input type="hidden" name="actionType" id="actionType"  th:value="Withdraw"></input>
 
 			
-		
+			<div th:if="${#fields.hasAnyErrors()}" >
+
+				<p  th:each="err : ${#fields.allErrors()}" th:text="${err}" class="error"  />
+
+			</div>
 			
 			
 				<button type="submit" class="btn btn-secondary">WithDraw</button>

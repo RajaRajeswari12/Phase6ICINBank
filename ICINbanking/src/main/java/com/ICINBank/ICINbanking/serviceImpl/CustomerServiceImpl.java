@@ -58,8 +58,11 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
 	public Customer getCustomerBySessionVar(HttpServletRequest request) {			
 			HttpSession session = request.getSession(false);
+			Customer cust = null;
+			if(session != null) {
 			String username = (String) session.getAttribute("UserName"); 
-			Customer cust = findByUserName(username);
+			cust = findByUserName(username);
+			}
 			return cust;	
 			
 		}

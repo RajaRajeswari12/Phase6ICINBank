@@ -11,4 +11,6 @@ public class DepositOrWithdrawPOJO {
 	
 	private String actionType;
 	
+	private String customerName;
+	
 }

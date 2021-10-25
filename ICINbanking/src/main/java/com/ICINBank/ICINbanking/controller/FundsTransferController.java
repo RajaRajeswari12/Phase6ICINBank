@@ -18,6 +18,7 @@ import com.ICINBank.ICINbanking.model.Customer;
 import com.ICINBank.ICINbanking.service.CurrentAccountService;
 import com.ICINBank.ICINbanking.service.CustomerService;
 import com.ICINBank.ICINbanking.service.SavingsAccountService;
+import com.ICINBank.ICINbanking.validators.FundsTransferValidator;
 
 @Controller
 public class FundsTransferController {
@@ -28,6 +29,9 @@ public class FundsTransferController {
 	private CurrentAccountService currentAccountService;
 	@Autowired
 	private SavingsAccountService savingsAccountService;
+	
+	@Autowired
+	private FundsTransferValidator fundsTransferValidator;
 
 
 	private Logger log = LoggerFactory.getLogger(FundsTransferController.class);
@@ -59,10 +63,8 @@ public class FundsTransferController {
 		log.info("Initiated the Funds Transfer Function" + transferDetailPOJO.toString());
 		Customer cust = customerService.getCustomerBySessionVar(request);
 		ModelAndView fundTransfertMV = new ModelAndView();
-		//		userService.authenticateUser(user, bindingResult);
-
-
-
+		transferDetailPOJO.setUserName(cust.getUser().getUserName());
+		fundsTransferValidator.validate(transferDetailPOJO, bindingResult);
 		if(bindingResult.hasErrors()) {
 			fundTransfertMV.setViewName("FundTransfer");
 			return fundTransfertMV;

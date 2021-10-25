@@ -1,0 +1,5 @@
+package com.ICINBank.ICINbanking.validators;
+
+public class DepositOrWithdrawValidator {
+
+}

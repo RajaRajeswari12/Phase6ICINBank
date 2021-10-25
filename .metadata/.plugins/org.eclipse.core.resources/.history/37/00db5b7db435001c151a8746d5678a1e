@@ -1,0 +1,49 @@
+package com.ICINBank.ICINbanking.validators;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.Validator;
+
+import com.ICINBank.ICINbanking.POJO.DepositOrWithdrawPOJO;
+import com.ICINBank.ICINbanking.POJO.TransferDetailPOJO;
+import com.ICINBank.ICINbanking.model.Customer;
+import com.ICINBank.ICINbanking.service.CustomerService;
+
+@Component
+public class FundsTransferValidator implements Validator{
+
+	@Autowired
+	private CustomerService customerService;
+	
+	@Override
+	public boolean supports(Class<?> clazz) {
+		
+		return TransferDetailPOJO.class.equals(clazz);
+	}
+
+	@Override
+	public void validate(Object target, Errors errors) {
+		
+		TransferDetailPOJO transferDetailPOJO = (TransferDetailPOJO)target;
+		Customer customer = customerService.findByUserName(transferDetailPOJO.getCustomerName());
+		
+		String errorMessage = null;
+
+		if(transferDetailPOJO.getAmountToBeTranfered() <= 0) {
+			errors.rejectValue("amount", "Enter Valid Amount");
+			errorMessage = "Enter Valid Amount";
+		}else if(transferDetailPOJO.getActionType().equalsIgnoreCase("withdraw")) {
+			if(transferDetailPOJO.getAccountType().equalsIgnoreCase("savings") && (transferDetailPOJO.getAmount() > customer.getSavingsAccount().getAmount())) {
+				errors.rejectValue("amount", "Insufficient Amount");
+				errorMessage="Insufficient Amount";
+			}else if(transferDetailPOJO.getAccountType().equalsIgnoreCase("primary") && (transferDetailPOJO.getAmount() > customer.getCurrentAccount().getAmount())) {
+				errors.rejectValue("amount", "Insufficient Amount");
+			}
+			
+		}
+
+	}
+
+}

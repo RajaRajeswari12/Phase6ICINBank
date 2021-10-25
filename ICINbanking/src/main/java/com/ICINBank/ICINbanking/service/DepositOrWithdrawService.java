@@ -1,6 +1,7 @@
 package com.ICINBank.ICINbanking.service;
 
 import org.springframework.data.domain.Page;
+import org.springframework.validation.BindingResult;
 
 import com.ICINBank.ICINbanking.POJO.DepositOrWithdrawPOJO;
 import com.ICINBank.ICINbanking.model.Customer;
@@ -15,5 +16,7 @@ public interface DepositOrWithdrawService {
 	void doDepositOrWithdraw(int id);
 	
 	void cancelDepositOrWithdraw(int id);
+	
+	public void validateDepositOrWithdrawPage(DepositOrWithdrawPOJO depositOrWithdrawPOJO,BindingResult bindingResult,Customer customer);
 
 }

@@ -13,8 +13,8 @@ import com.ICINBank.ICINbanking.service.CustomerService;
 @Component
 public class UserRegistrationValidator implements Validator{
 
-	@Autowired
-	private CustomerService customerService;
+@Autowired
+private CustomerService customerService;
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -28,7 +28,7 @@ public class UserRegistrationValidator implements Validator{
 		Customer customerReg = (Customer) target;
 		
 		if(customerReg.getPhoneNum().length() < 10) {
-			errors.rejectValue("phoneNum", "phone number length should be 10 digits");
+			errors.rejectValue("phoneNum", "phone.length");
 		}
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "user.userName", "NotEmpty");
@@ -37,9 +37,9 @@ public class UserRegistrationValidator implements Validator{
 			errors.rejectValue("user.userName", "Size.customer.UserName");
 		}
 		
-//		if(customerService.findByUserName(customerReg.getUser().getUserName())!=null) {
-//			errors.rejectValue("user.userName", "Duplicate.adminUser.adminUserName");
-//		}
+		if(customerService.findByUserName(customerReg.getUser().getUserName())!=null) {
+			errors.rejectValue("user.userName", "Duplicate.adminUser.adminUserName");
+		}
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"user.password" , "NotEmpty");
 		

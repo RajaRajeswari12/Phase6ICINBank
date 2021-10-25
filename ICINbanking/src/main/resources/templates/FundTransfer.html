@@ -19,7 +19,8 @@
 
 	<div class="container col-md-8 col-md-offset-3" style="overflow: auto">
 		<h1>Fund Transfer</h1>
-		<form action="#" th:action="@{/transferFund}" th:object="${transferDetailPOJO}"
+		<hr>
+		<form  th:action="@{/transferFund}" th:object="${transferDetailPOJO}"
 			method="POST">
 			
 				<div class="form-group">
@@ -60,21 +61,9 @@
 			</div>
 			<button type="submit" class="btn btn-secondary">Transfer Fund</button>
 
-			<div th:if="${#fields.hasAnyErrors()}" >
-
-				<p  th:each="err : ${#fields.allErrors()}" th:text="${err}" class="error"  />
-
-			</div>
+	
 	
 		</form>
 		</div>
 </body>
 </html>
-
-			<!-- div class="form-group">
-				<label for="fromAccNo">From Account No:</label> <input type="number"
-					class="form-control" th:field="*{fromAccNo}"
-					placeholder="from Acc No" required>
-				<p th:if="${#fields.hasErrors('fromAccNo')}"
-					th:errorclass="error" th:errors="*{fromAccNo}" />
-			</div -->

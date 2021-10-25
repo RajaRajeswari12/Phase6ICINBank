@@ -14,7 +14,7 @@
 </style>
 </head>
 
-<!-- header th:insert="fragments/header" ></header -->
+<header th:replace="fragments/header"></header>
 <body>
 
 	<div class="container col-md-8 col-md-offset-3" style="overflow: auto">
@@ -36,7 +36,7 @@
 					th:errorclass="error" th:errors="*{password}" />
 			</div>
 
-			<button type="submit" class="btn btn-secondary">Login</button>
+			<button type="submit" class="btn btn-primary">Login</button>
 
 			<div th:if="${#fields.hasAnyErrors()}" >
 

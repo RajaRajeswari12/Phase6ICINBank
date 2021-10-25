@@ -34,11 +34,7 @@ public class AccountTransactionController {
 	
 	@GetMapping("/viewSavingsAccountTransaction")
 	public String getSavingsAccountTrans(Model model,@RequestParam("TransactionAccNo") int TransactionAccNo ) {
-		
-//		HttpSession session = request.getSession();
-//		Customer cust = customerService.findByUserName((String)session.getAttribute("UserName"));
-//		int TransactionAccNo = cust.getSavingsAccount().getSavingActNo();
-				
+
 		return paginateViewBySavingsAccNo(1,model,TransactionAccNo);
 		
 	}
@@ -94,9 +90,6 @@ public class AccountTransactionController {
 			TransactionAccNo = cust.getSavingsAccount().getSavingActNo();
 			returnResult = paginateViewBySavingsAccNo(1,model,TransactionAccNo);
 		}
-		return returnResult;
-		
-		
-		
+		return returnResult;		
 	}
 }

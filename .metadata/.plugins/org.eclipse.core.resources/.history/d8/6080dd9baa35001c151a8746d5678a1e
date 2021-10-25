@@ -1,0 +1,22 @@
+package com.ICINBank.ICINbanking.validators;
+
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
+import com.ICINBank.ICINbanking.POJO.DepositOrWithdrawPOJO;
+
+public class DepositOrWithdrawValidator implements Validator{
+
+	@Override
+	public boolean supports(Class<?> clazz) {
+		
+		return DepositOrWithdrawPOJO.class.equals(clazz);
+	}
+
+	@Override
+	public void validate(Object target, Errors errors) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

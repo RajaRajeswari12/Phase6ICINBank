@@ -52,12 +52,12 @@
     <fullyQualifiedTypeName name="com.ICINBank.ICINbanking.service.CustomerService"/>
     <fullyQualifiedTypeName name="com.ICINBank.ICINbanking.service.CurrentAccountService"/>
     <fullyQualifiedTypeName name="com.ICINBank.ICINbanking.service.SavingsAccountService"/>
-    <fullyQualifiedTypeName name="org.slf4j.LoggerFactory"/>
-    <fullyQualifiedTypeName name="org.slf4j.Logger"/>
     <fullyQualifiedTypeName name="org.springframework.validation.Validator"/>
     <fullyQualifiedTypeName name="com.ICINBank.ICINbanking.POJO.DepositOrWithdrawPOJO"/>
     <fullyQualifiedTypeName name="com.ICINBank.ICINbanking.validators.DepositOrWithdrawValidator"/>
     <fullyQualifiedTypeName name="com.ICINBank.ICINbanking.POJO.TransferDetailPOJO"/>
     <fullyQualifiedTypeName name="com.ICINBank.ICINbanking.validators.FundsTransferValidator"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="org.slf4j.LoggerFactory"/>
+    <fullyQualifiedTypeName name="org.slf4j.Logger"/>
 </qualifiedTypeNameHistroy>

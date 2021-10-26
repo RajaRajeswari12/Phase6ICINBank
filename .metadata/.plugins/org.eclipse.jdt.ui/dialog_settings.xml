@@ -14,6 +14,8 @@
 	<section name="completion_proposal_size">
 		<item key="contextSelector.size.x" value="337"/>
 		<item key="contextSelector.size.y" value="277"/>
+		<item key="size.x" value="538"/>
+		<item key="size.y" value="1037"/>
 	</section>
 	<section name="org.eclipse.jdt.internal.ui.dialogs.OpenTypeSelectionDialog2">
 		<item key="ShowStatusLine" value="true"/>
@@ -38,6 +40,7 @@
 		<item key="updateTextualMatches" value="false"/>
 		<item key="updateQualifiedNames" value="false"/>
 		<item key="patterns" value="*"/>
+		<item key="renameSubpackages" value="false"/>
 	</section>
 	<section name="NewPackageWizardPage">
 		<item key="create_package_info_java" value="false"/>

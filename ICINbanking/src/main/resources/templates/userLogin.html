@@ -22,14 +22,14 @@
 		<form action="#" th:action="@{/index}" th:object="${user}"
 			method="POST">
 			<div class="form-group">
-				<label for="userName">User Name:</label> <input type="text"
+				<label class="fw-bold" for="userName">User Name:</label> <input type="text"
 					class="form-control" th:field="*{userName}"
 					placeholder="User Name" required>
 				<p th:if="${#fields.hasErrors('userName')}"
 					th:errorclass="error" th:errors="*{userName}" />
 			</div>
 			<div class="form-group">
-				<label for="password">Password:</label> <input type="password"
+				<label class="fw-bold" for="password">Password:</label> <input type="password"
 					class="form-control" th:field="*{password}"
 					placeholder="Password" required>
 				<p th:if="${#fields.hasErrors('password')}"
@@ -44,7 +44,7 @@
 
 			</div>
 			<hr>
-			<a class="btn btn-primary" href="/signup">Sign-up</a>
+			<a class="btn btn-primary fw-bold" href="/signup">Sign-up</a>
 		</form>
 		</div>
 </body>

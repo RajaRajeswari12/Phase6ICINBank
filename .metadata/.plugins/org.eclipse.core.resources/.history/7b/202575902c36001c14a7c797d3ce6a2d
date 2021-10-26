@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Transfer Amount</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<style>
+.error {
+	color: red;
+}
+</style>
+</head>
+
+<header th:insert="fragments/header" ></header>
+<body>
+
+	<div class="container col-md-8 col-md-offset-3" style="overflow: auto">
+		<h1>Fund Transfer</h1>
+		<hr>
+		<form  th:action="@{/transferFund}" th:object="${transferDetailPOJO}"
+			method="POST">
+			
+				<div class="form-group">
+				
+					<label for="fromAccType">Choose From Account Type:</label>
+
+					<select class="btn btn-info dropdown-toggle" name="fromAccType" id="fromAccType" data-bs-toggle="dropdown" >
+					  <option class="dropdown-item"  th:value="primary" th:selected="*{isCurrentAcc}">Primary</option>
+					  <option class="dropdown-item"  th:value="savings" th:selected="*{isSavingsAcc}">Savings</option>
+					  
+					</select>
+				</div>
+			
+			<div class="form-group">
+				<label for="toAccNo">To Account No:</label> <input type="number"
+					class="form-control" th:field="*{toAccNo}"
+					placeholder="ToAccNo" required>
+				<p th:if="${#fields.hasErrors('toAccNo')}"
+					th:errorclass="error" th:errors="*{toAccNo}" />
+			</div>
+				<div class="form-group">
+				
+					<label for="toAccType">Choose To Account Type:</label>
+
+					<select class="btn btn-info dropdown-toggle  " name="toAccType" id="toAccType" data-bs-toggle="dropdown">
+					  <option class="dropdown-item"  th:value="primary" th:selected="*{toAccType=='primary'}">Primary</option>
+					  <option class="dropdown-item"  th:value="savings" th:selected="*{toAccType=='savings'}">Savings</option>
+					  
+					</select>
+			</div>
+			
+				<div class="form-group">
+				<label for="amountToBeTranfered">Amount</label> <input type="number"
+					class="form-control" th:field="*{amountToBeTranfered}"
+					placeholder="amountToBeTranfered" required>
+				<p th:if="${#fields.hasErrors('amountToBeTranfered')}"
+					th:errorclass="error" th:errors="*{amountToBeTranfered}" />
+			</div>
+			<button type="submit" class="btn btn-secondary">Transfer Fund</button>
+
+	
+	
+		</form>
+		</div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Cheque Book Request List</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link th:rel="stylesheet" th:href="@{/mystyle.css}" />
+</head>
+
+<body>
+
+<header th:replace="fragments/adminHeader"></header>
+	
+<div th:if="${session.AdminName != null}">	
+	
+	<div class="container my-2">
+
+
+
+		<h1>Cheque Book Request List</h1>
+
+		<hr>
+		<br>
+		<div th:if="${totalRecords != 0}">
+			<table border="1" class="table table-striped table-responsive-md">
+				<thead>
+					<tr>
+						<th>User ID</th>
+						<th>User Name</th>
+						<th>Account</th>
+						<th>Description</th>
+						<th>Confirmed ?</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="chequeBkReq : ${listOfChequeBookReq}">
+						<td th:text="${chequeBkReq.customer.user.id}"></td>
+						<td th:text="${chequeBkReq.customer.user.userName}"></td>
+						<td th:text="${chequeBkReq.accountType}"></td>
+						<td th:text="${chequeBkReq.description}"></td>
+						<td th:text="${chequeBkReq.status}"></td>
+						
+						<td>
+							<div th:switch="${chequeBkReq.status}"> 
+										  <a th:case="pending"  th:href="@{'/approveChequeBookReq/?id={id}&pageNo='+${activePage}(id=${chequeBkReq.id})}">Confirm</a>
+										  <a th:case="approved">Confirmed</a>
+							</div>						
+						</td>
+						
+					</tr>
+
+				</tbody>
+			</table>
+
+			<div th:if="${totalPages > 1}">
+				
+						<ul class="pagination">
+							<span th:each="index : ${#numbers.sequence(1,totalPages)}">
+								<li class="page-item"><a class="page-link"
+									th:href="@{'/viewChequeBookList/'+${index}}">[[${index}]]</a></li>
+							</span>
+						</ul>
+					
+
+			</div>
+		</div>
+		<div th:if="${totalRecords == 0}">
+		<h2>No Transactions Done !!!!!!!!</h2>
+	</div>
+	</div>
+</div>
+	
+</body>
+</html>
+

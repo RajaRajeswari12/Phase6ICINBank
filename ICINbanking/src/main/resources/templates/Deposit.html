@@ -27,7 +27,7 @@
 		<hr>
 			<div class="form-group">
 				
-					<label for="accountType">Choose Account Type:</label>
+					<label class="fw-bold" for="accountType">Choose Account Type:</label>
 
 					<select class="btn btn-info dropdown-toggle " name="accountType" id="accountType" data-bs-toggle="dropdown">
 					  <option class="dropdown-item"  th:value="primary">Primary</option>
@@ -37,7 +37,7 @@
 			</div>
 
 			<div class="form-group">
-				<label for="amount">Enter Amount </label> <input type="number"
+				<label class="fw-bold" for="amount">Enter Amount </label> <input type="number"
 					class="form-control" th:field="*{amount}" />
 				
 			</div>
@@ -52,7 +52,7 @@
 		
 			
 			
-				<button type="submit" class="btn btn-info">Deposit</button>
+				<button type="submit" class="btn btn-info fw-bold">Deposit</button>
 				
 			
 		</form>

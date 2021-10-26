@@ -23,9 +23,20 @@
 <header th:replace="fragments/header"></header>
 
 <body>
-<div th:if="${session.UserName == null}">
-<h1> Welcome to ICINBank</h1>
-</div>
+
+<div class="container">
+		<div class="p-5 mb-4 bg-light rounded-3">
+			<div class="container-fluid py-5">
+				<h1 class="display-3 fw-bold" style="text-align: center;" >Welcome to ICINBank</h1>
+				<div th:if="${session.UserName != null}">
+				<p class="col-md-8 fs-4" style="padding-left :10%; font-weight: bold;color:teal;text-align: center;"> Welcome  [<span th:text="${authCustomer.firstName}"></span> <span th:text="${authCustomer.lastName}"></span>  ] </p>
+				</div>
+				
+				
+			</div>
+		
+
+
 <div th:if="${session.UserName != null}">
 
 <form th:object="${authCustomer}" method="POST">
@@ -33,18 +44,18 @@
 	
 			<div style="height: 70px;width: 300px;background-color: rgb(3, 219, 252); border-style: solid;
   border-width: thin;">		
-				<p th:text="'Primary Account Balance: ' +${authCustomer.currentAccount.amount}"></p>		
+				<p class="fw-bold" th:text="'Primary Account Balance: ' +${authCustomer.currentAccount.amount}"></p>		
 			</div>
 			
-			<div style="height: 30px;width: 300px;  border-style: solid;
-  border-width: thin;">
+			<div style="height: 30px;width: 300px;  border-style: solid;  border-width: thin;">
 			
-				<p>View Details:   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+				<p class="fw-bold">View Details:   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 				
 				<a th:href="@{'/viewCurrentAccountTransaction/?TransactionAccNo='+${authCustomer.currentAccount.currentActNo}}">
 				          <span class="fa fa-arrow-circle-right" style="font-size:24px"></span>
 				        </a>
+				
 				</p>
 			</div>
 	</div>
@@ -53,14 +64,14 @@
 	
 			<div style="height: 70px;width: 200px;background-color: rgb(3, 219, 252); border-style: solid;
   border-width: thin;">		
-				<p >Deposit </p>	
-				    <div class="fa fa-credit-card" style="font-size:24px;"></div>
+				<p class="fw-bold" >Deposit &nbsp; &nbsp;
+				 <span class="fa fa-credit-card display-3" style="font-size:60px;"></span></p>	
+				   
 			</div>
 			
-			<div style="height: 30px;width: 200px; border-style: solid;
-  border-width: thin;">
+			<div style="height: 30px;width: 200px; border-style: solid; border-width: thin;">
 			
-				<p> Go To Deposit  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+				<p class="fw-bold"> Go To Deposit  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 				
 				  <a href="/depositOrWithdrawFund/?actionType=Deposit">
 				       <span class="fa fa-arrow-circle-right" style="font-size:24px"></span>
@@ -71,16 +82,16 @@
 	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 	<div style="height: 100px;width: 200px; padding: 30px; border: 3px; display: inline-block;">
 	
-					<div style="height: 70px;width: 200px;background-color: rgb(3, 219, 252); border-style: solid;
-  border-width: thin;">		
-				<p >Withdraw </p>		
-				 <div class="fa fa-credit-card" style="font-size:24px;"></div>
+					<div style="height: 70px;width: 200px;background-color: rgb(3, 219, 252); border-style: solid;  border-width: thin;">		
+				<p class="fw-bold" >Withdraw &nbsp; &nbsp;		
+				 <span class="fa fa-money display-3" style="font-size:60px;"></span>
+				 </p>
 			</div>
 			
 			<div style="height: 30px;width: 200px; border-style: solid;
   border-width: thin;">
 			
-				<p> Go To Withdraw  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 	
+				<p class="fw-bold"> Go To Withdraw  &nbsp; &nbsp; &nbsp; &nbsp; 	
 				
 				  <a href="/depositOrWithdrawFund/?actionType=WithDraw">
 				           <span class="fa fa-arrow-circle-right" style="font-size:24px"></span>
@@ -91,16 +102,14 @@
 <br>
 		<div style="height: 100px;width: 300px; padding: 30px;border: 3px;border-color: black; ">
 	
-			<div style="height: 70px;width: 300px;background-color: rgb(3, 252, 211); border-style: solid;
-  border-width: thin;">		
-				<p th:text="'Savings Account Balance: ' +${authCustomer.savingsAccount.amount}"></p>		
+			<div style="height: 70px;width: 300px;background-color: rgb(3, 252, 211); border-style: solid;  border-width: thin;">		
+				<p class="fw-bold" th:text="'Savings Account Balance: ' +${authCustomer.savingsAccount.amount}"></p>		
 			</div>
 			
-			<div style="height: 30px;width: 300px; border-style: solid;
-  border-width: thin;">
+			<div style="height: 30px;width: 300px; border-style: solid;  border-width: thin;">
 			 
-				<p>View Details:  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+				<p class="fw-bold">View Details:  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 				 <a th:href="@{'/viewSavingsAccountTransaction/?TransactionAccNo='+${authCustomer.savingsAccount.savingActNo}}">
 				          <span class="fa fa-arrow-circle-right" style="font-size:24px"></span>
 				        </a>
@@ -108,6 +117,9 @@
 			</div>
 	</div>
 	</form>
+	</div>
+	
+	</div>
 	</div>
 </body>
 </html>

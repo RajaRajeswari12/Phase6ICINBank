@@ -7,6 +7,17 @@
 <body>
 <header th:replace="fragments/adminHeader"></header>
 
-HII
+<div class="container">
+		<div class="p-5 mb-4 bg-light rounded-3">
+			<div class="container-fluid py-5">
+				<h1 class="display-5 fw-bold" >Welcome To ICIN Bank</h1>
+				<div th:if="${session.AdminName != null}">
+				<p class="col-md-8 fs-4" style="font-weight: bold;color:teal;text-align: center;"> Welcome Admin [<span th:text="${session.AdminName}"></span>] </p>
+				</div>
+				
+				
+			</div>
+		</div>
+	</div>
 </body>
 </html>

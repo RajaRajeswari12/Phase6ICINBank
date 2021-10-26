@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.thymeleaf.org ">
+  <head>
+<meta charset="ISO-8859-1">
+<title>User Home Page</title>
+
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+<style>
+.error {
+	color: red;
+}
+
+</style>
+</head>
+ 
+<header th:replace="fragments/header"></header>
+
+<body>
+
+<div class="container">
+		<div class="p-5 mb-4 bg-light rounded-3">
+			<div class="container-fluid py-5">
+				<h1 class="display-6 fw-bold" style="text-align: center;" >Welcome to ICINBank</h1>
+				<div th:if="${session.UserName != null}">
+				<p class="col-md-8 fs-4" style="font-weight: bold;color:green;text-align: center;"> Welcome  [<span th:text="${authCustomer.firstName}"></span> <span th:text="${authCustomer.lastName}"></span>  ] </p>
+				</div>
+				
+				
+			</div>
+		
+
+
+<div th:if="${session.UserName != null}">
+
+<form th:object="${authCustomer}" method="POST">
+	<div style="height: 100px;width: 300px; padding: 30px; border: 3px; display: inline-block; ">
+	
+			<div style="height: 70px;width: 300px;background-color: rgb(3, 219, 252); border-style: solid;
+  border-width: thin;">		
+				<p th:text="'Primary Account Balance: ' +${authCustomer.currentAccount.amount}"></p>		
+			</div>
+			
+			<div style="height: 30px;width: 300px;  border-style: solid;  border-width: thin;">
+			
+				<p>View Details:   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+				
+				<a th:href="@{'/viewCurrentAccountTransaction/?TransactionAccNo='+${authCustomer.currentAccount.currentActNo}}">
+				          <span class="fa fa-arrow-circle-right" style="font-size:24px"></span>
+				        </a>
+				
+				</p>
+			</div>
+	</div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+	<div style="height: 100px;width: 200px; padding: 30px; border: 3px; display: inline-block;">
+	
+			<div style="height: 70px;width: 200px;background-color: rgb(3, 219, 252); border-style: solid;
+  border-width: thin;">		
+				<p >Deposit </p>	
+				    <div class="fa fa-credit-card" style="font-size:24px;"></div>
+			</div>
+			
+			<div style="height: 30px;width: 200px; border-style: solid; border-width: thin;">
+			
+				<p> Go To Deposit  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+				
+				  <a href="/depositOrWithdrawFund/?actionType=Deposit">
+				       <span class="fa fa-arrow-circle-right" style="font-size:24px"></span>
+				        </a>
+				</p>
+			</div>
+	</div>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+	<div style="height: 100px;width: 200px; padding: 30px; border: 3px; display: inline-block;">
+	
+					<div style="height: 70px;width: 200px;background-color: rgb(3, 219, 252); border-style: solid;  border-width: thin;">		
+				<p >Withdraw </p>		
+				 <div class="fa fa-credit-card" style="font-size:24px;"></div>
+			</div>
+			
+			<div style="height: 30px;width: 200px; border-style: solid;
+  border-width: thin;">
+			
+				<p> Go To Withdraw  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 	
+				
+				  <a href="/depositOrWithdrawFund/?actionType=WithDraw">
+				           <span class="fa fa-arrow-circle-right" style="font-size:24px"></span>
+				        </a>
+				</p>
+			</div>
+	</div>
+<br>
+		<div style="height: 100px;width: 300px; padding: 30px;border: 3px;border-color: black; ">
+	
+			<div style="height: 70px;width: 300px;background-color: rgb(3, 252, 211); border-style: solid;  border-width: thin;">		
+				<p th:text="'Savings Account Balance: ' +${authCustomer.savingsAccount.amount}"></p>		
+			</div>
+			
+			<div style="height: 30px;width: 300px; border-style: solid;  border-width: thin;">
+			 
+				<p>View Details:  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+				 <a th:href="@{'/viewSavingsAccountTransaction/?TransactionAccNo='+${authCustomer.savingsAccount.savingActNo}}">
+				          <span class="fa fa-arrow-circle-right" style="font-size:24px"></span>
+				        </a>
+				</p>
+			</div>
+	</div>
+	</form>
+	</div>
+	
+	</div>
+	</div>
+</body>
+</html>
